@@ -2,7 +2,7 @@ version: "3"
 services:
   php:
       # Dockerfile 构建
-    build: /docker-compose/php/bulid/php-7.3-fpm
+    build: $PWD/php/bulid/php-7.3-fpm
     container_name: php
     ports:
       - 9000:9000
@@ -10,7 +10,7 @@ services:
       # 网站根目录
       - /data:/data
       # php 配置文件
-      - /docker-compose/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+      - $PWD/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
     links:
       - mysql
       - redis
@@ -28,13 +28,13 @@ services:
       - 3306:3306
     volumes:
       #  mysql 基础配置文件
-      - /docker-compose/mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - $PWD/mysql/my.cnf:/etc/mysql/my.cnf:ro
       #  mysql 扩展配置文件
-      - /docker-compose/mysql/ext.conf.d:/etc/mysql/ext.conf.d:ro
+      - $PWD/mysql/ext.conf.d:/etc/mysql/ext.conf.d:ro
       # mysql 数据库
-      - /docker-compose/mysql/data:/var/lib/mysql:rw
+      - $PWD/mysql/data:/var/lib/mysql:rw
       # mysql 错误日志
-      - /docker-compose/mysql/log/error.log:/var/log/mysql/error.log:rw
+      - $PWD/mysql/log/error.log:/var/log/mysql/error.log:rw
     restart: always
   nginx:
     image: nginx:1.16.0
@@ -50,13 +50,13 @@ services:
       # 同 php 一起共享 /data 目录
       - /data:/data
       # nginx 基础配置文件
-      - /docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf:ro 
+      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf:ro 
       # nginx 网站文件
-      - /docker-compose/nginx/conf.d:/etc/nginx/conf.d:ro
+      - $PWD/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx https配置文件
-      - /docker-compose/nginx/cert:/etc/nginx/cert:ro
+      - $PWD/nginx/cert:/etc/nginx/cert:ro
       # nginx 日志 
-      - /docker-compose/nginx/log:/var/log/nginx:rw
+      - $PWD/nginx/log:/var/log/nginx:rw
     restart: always
   redis:
     user: redis
@@ -66,9 +66,9 @@ services:
       - 6379:6379
     volumes:
       # redis 配置文件
-      - /docker-compose/redis/redis.conf:/etc/redis/redis.conf:ro
+      - $PWD/redis/redis.conf:/etc/redis/redis.conf:ro
       # redis 持久化数据存储
-      - /docker-compose/redis/data:/data
+      - $PWD/redis/data:/data
       # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
     restart: always
