@@ -68,7 +68,7 @@ services:
       # redis 配置文件
       - $PWD/redis/redis.conf:/etc/redis/redis.conf:ro
       # redis 持久化数据存储
-      - $PWD/redis/data:/data
+      - $PWD/redis/data:/data/redis
       # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
     restart: always
