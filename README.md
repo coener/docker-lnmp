@@ -31,7 +31,7 @@ git clone https://github.com/coener/docker-lnmp.git
 cd docker-lnmp
 docker-compose up -d
 ```
-###小技巧
+### 小技巧
 
 我们可以通过别名在主机上为其它容器添加一些快捷命令。 比如：
 
