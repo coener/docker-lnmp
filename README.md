@@ -31,4 +31,19 @@ git clone https://github.com/coener/docker-lnmp.git
 cd docker-lnmp
 docker-compose up -d
 ```
+### 小技巧
 
+我们可以通过别名在主机上为其它容器添加一些快捷命令。 比如：
+
+```
+vim ~/.bashrc
+# 添加php与mysql容器执行命令
+alias php='docker exec -it php php'
+alias composer='docker exec -it php composer'
+alias mysql='docker exec -it mysql mysql'
+alias redis-cli='docker exec -it redis redis-cli'
+
+# 生效
+source ~/.bashrc
+
+```
