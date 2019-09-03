@@ -71,18 +71,5 @@ services:
       # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
     restart: always
-  supervisor:
-    image: kdelfour/supervisor-docker
-    container_name: supervisor
-    ports:
-      - 9001:9001
-    volumes:
-      # supervisor 基础配置文件     
-      - $PWD/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf:ro
-      # superviso 错误日志
-      - $PWD/supervisor/log:/var/log/supervisor/log:rw
-      # supervisor 配置文件
-      - $PWD/supervisor/conf.d:/etc/supervisor/conf.d:ro
-      - $PWD/supervisor/supervisor.sock:/var/run/supervisor.sock:ro
-    restart: always
+
 
